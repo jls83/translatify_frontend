@@ -34,7 +34,7 @@ class InputPhrase extends Component {
   }
 }
 
-class OutputDisplay extends Component {
+class ResultDisplay extends Component {
   handleSubmit(event) {
     console.log('Requested another translation');
     event.preventDefault();
@@ -44,8 +44,8 @@ class OutputDisplay extends Component {
     return(
       <div className="OutputDisplay">
         <form onSubmit={this.handleSubmit}>
-          <PhraseDisplay phrase_type="InputPhrase" phrase={"Buona Pasqua!"} input_language={"Italian"}/>
-          <PhraseDisplay phrase_type="OutputPhrase" phrase={"Happy Easter!"}/>
+          <PhraseDisplay phrase_type="InputData" phrase={"Buona Pasqua!"} input_language={"Italian"}/>
+          <PhraseDisplay phrase_type="OutputData" phrase={"Happy Easter!"}/>
           <input type="submit" value="Translate Again?" />
         </form>
       </div>
@@ -57,11 +57,11 @@ class PhraseDisplay extends Component {
   render() {
     let language_data = '';
     let phrase_header = '';
-    if (this.props.phrase_type === "InputPhrase") {
+    if (this.props.phrase_type === "InputData") {
       language_data = this.props.input_language;
       phrase_header = "You Submitted:"
     }
-    else if (this.props.phrase_type === "OutputPhrase") {
+    else if (this.props.phrase_type === "OutputData") {
       phrase_header = "Translated:"
     }
     return(
@@ -124,7 +124,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <UserLogin/>
+        <ResultDisplay/>
       </div>
     );
   }
