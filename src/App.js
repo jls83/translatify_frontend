@@ -12,13 +12,19 @@ class App extends Component {
       input_phrase: "Enter your text to translate here!",
       input_language: "",
       output_phrase: "",
-      isLoggedIn: true, // for testing!
+      username: "",
+      password: "",
+      isLoggedIn: false, // for testing!
     };
     this.state = this.initState;
 
     this.handleNextTranslation = this.handleNextTranslation.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleLogoutSubmit = this.handleLoginSubmit.bind(this);
   }
 
   // For ResultController
@@ -38,10 +44,46 @@ class App extends Component {
     event.preventDefault();
   }
 
+  // For LoginController
+  handleUsernameChange(event) {
+    this.setState({
+      username: event.target.value
+    });
+  }
+
+  handlePasswordChange(event) {
+    this.setState({
+      password: event.target.value
+    });
+  }
+
+  handleLoginSubmit (event) {
+    console.log(this.state.username + "has logged in.");
+    this.setState({
+      password: "",
+      isLoggedIn: true
+    });
+    event.preventDefault();
+  }
+
+  handleLogoutSubmit (event) {
+    console.log(this.state.username + "has logged out.");
+    this.setState({
+      username: "",
+      password: "",
+      isLoggedIn: false
+    });
+    event.preventDefault();
+  }
+
   render() {
     const handleInputSubmit = this.handleInputSubmit;
     const handleInputChange = this.handleInputChange;
     const handleNextTranslation = this.handleNextTranslation;
+    const handleUsernameChange = this.handleUsernameChange;
+    const handlePasswordChange = this.handlePasswordChange;
+    const handleLoginSubmit = this.handleLoginSubmit;
+    const handleLogoutSubmit = this.handleLoginSubmit;
 
     const inputPhrase = this.state.input_phrase;
     const inputLanguage = this.state.input_language;
@@ -51,7 +93,11 @@ class App extends Component {
     let displayComponent;
 
     if (!isLoggedIn) {
-      displayComponent = <UserLogin/>;
+      displayComponent = (<UserLogin
+        handleSubmit={handleLoginSubmit}
+        handleUsernameChange={handleUsernameChange}
+        handlePasswordChange={handlePasswordChange}
+      />);
     }
     else if (inputLanguage === "") {
       displayComponent = (<InputPhrase
