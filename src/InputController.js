@@ -6,6 +6,7 @@ export default class InputPhrase extends Component {
     const inputPhrase = this.props.input_phrase;
     const handleSubmit = this.props.handleSubmit;
     const handleChange = this.props.handleChange;
+
     return(
       <div className="InputPhrase">
         <form onSubmit={handleSubmit}>
