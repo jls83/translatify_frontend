@@ -31,7 +31,11 @@ class App extends Component {
   // For ResultController
   handleNextTranslation(event) {
     console.log("Next translation requested");
-    this.setState(this.initState);
+    this.setState({
+      input_phrase: "",
+      input_language: "",
+      output_phrase: ""
+    });
   }
 
   // For InputController
