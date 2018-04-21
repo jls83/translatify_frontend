@@ -14,8 +14,9 @@ class App extends Component {
       output_phrase: "",
       username: "",
       password: "",
-      isLoggedIn: true, // for testing!
+      isLoggedIn: false, // for testing!
     };
+
     this.state = this.initState;
 
     this.handleNextTranslation = this.handleNextTranslation.bind(this);
@@ -23,14 +24,14 @@ class App extends Component {
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-    this.handleLogoutSubmit = this.handleLoginSubmit.bind(this);
   }
 
   // For ResultController
   handleNextTranslation(event) {
     console.log("Next translation requested");
-    this.state = this.initState;
+    this.setState(this.initState);
   }
 
   // For InputController
@@ -46,33 +47,54 @@ class App extends Component {
 
   // For LoginController
   handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value
-    });
+    this.setState({username: event.target.value});
   }
 
   handlePasswordChange(event) {
-    this.setState({
-      password: event.target.value
-    });
-  }
-
-  handleLoginSubmit (event) {
-    console.log(this.state.username + "has logged in.");
-    this.setState({
-      password: "",
-      isLoggedIn: true
-    });
-    event.preventDefault();
+    this.setState({password: event.target.value});
   }
 
   handleLogoutSubmit (event) {
     console.log(this.state.username + "has logged out.");
     this.setState({
       username: "",
-      password: "",
       isLoggedIn: false
     });
+    event.preventDefault();
+  }
+
+  handleLoginSubmit(event) {
+    const url = "http://localhost:8000/rest-auth/login/";
+    const data = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    const headers = new Headers({
+      "Content-Type": "application/json"
+    });
+
+    fetch(url, {
+      body: JSON.stringify(data),
+      method: 'POST',
+      headers: headers
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText)
+        }
+        return response
+      })
+      .then(response => {
+        this.setState({
+          authToken: response.json().key,
+          isLoggedIn: true,
+          password: ""
+        });
+      })
+      .catch(() => {
+        console.log("Error logging in");
+        this.setState({username: "", isLoggedIn: false})
+      });
     event.preventDefault();
   }
 
@@ -83,7 +105,7 @@ class App extends Component {
     const handleUsernameChange = this.handleUsernameChange;
     const handlePasswordChange = this.handlePasswordChange;
     const handleLoginSubmit = this.handleLoginSubmit;
-    const handleLogoutSubmit = this.handleLoginSubmit;
+    const handleLogoutSubmit = this.handleLogoutSubmit;
 
     const inputPhrase = this.state.input_phrase;
     const inputLanguage = this.state.input_language;
@@ -94,7 +116,7 @@ class App extends Component {
 
     if (!isLoggedIn) {
       displayComponent = (<UserLogin
-        handleSubmit={handleLoginSubmit}
+        handleLoginSubmit={handleLoginSubmit}
         handleUsernameChange={handleUsernameChange}
         handlePasswordChange={handlePasswordChange}
       />);
