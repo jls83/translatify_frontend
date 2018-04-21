@@ -1,130 +1,69 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class InputPhrase extends Component {
+import InputPhrase from './InputController';
+import ResultDisplay from './ResultController';
+import UserLogin from './LoginController';
+
+const testState = {
+  input_phrase: "Buona pasqua!",
+  input_language: "Italian",
+  output_phrase: "Happy Easter!",
+};
+
+class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input_phrase: 'Input your text to translate here.'
+    const testState = {
+      input_phrase: "Enter your text to translate here!",
+      input_language: "Italian",
+      output_phrase: "Happy Easter!",
     };
+    this.state = testState;
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
+    this.handleNextTranslation = this.handleNextTranslation.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleInputSubmit = this.handleInputSubmit.bind(this)
   }
 
-  handleChange(event) {
+  // For ResultController
+  handleNextTranslation(event) {
+    console.log("Next translation requested");
+    event.preventDefault();
+  }
+
+  // For InputController
+  handleInputChange(event) {
     this.setState({input_phrase: event.target.value});
   }
 
-  handleSubmit(event) {
+  handleInputSubmit(event) {
     console.log('A phrase was submitted: ' + this.state.input_phrase);
     event.preventDefault();
   }
 
   render() {
-    return(
-      <div className="InputPhrase">
-        <form onSubmit={this.handleSubmit}>
-          <textarea value={this.state.input_phrase} onChange={this.handleChange} />
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-    );
-  }
-}
-
-class ResultDisplay extends Component {
-  handleSubmit(event) {
-    console.log('Requested another translation');
-    event.preventDefault();
-  }
-
-  render() {
-    return(
-      <div className="OutputDisplay">
-        <form onSubmit={this.handleSubmit}>
-          <PhraseDisplay phrase_type="InputData" phrase={"Buona Pasqua!"} input_language={"Italian"}/>
-          <PhraseDisplay phrase_type="OutputData" phrase={"Happy Easter!"}/>
-          <input type="submit" value="Translate Again?" />
-        </form>
-      </div>
-    );
-  }
-}
-
-class PhraseDisplay extends Component {
-  render() {
-    let language_data = '';
-    let phrase_header = '';
-    if (this.props.phrase_type === "InputData") {
-      language_data = this.props.input_language;
-      phrase_header = "You Submitted:"
-    }
-    else if (this.props.phrase_type === "OutputData") {
-      phrase_header = "Translated:"
-    }
-    return(
-      <div className={this.props.phrase_type}>
-        <h4>{phrase_header}</h4>
-        <h2>{this.props.phrase}</h2>
-        <p>{language_data}</p>
-      </div>
-    );
-  }
-}
-
-class UserLogin extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      username: "",
-      password: ""
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-  }
-
-  handleUsernameChange(event) {
-    this.setState({
-      username: event.target.value
-    });
-  }
-
-  handlePasswordChange(event) {
-    this.setState({
-      password: event.target.value
-    });
-  }
-
-  handleSubmit (event) {
-    console.log(this.state.username, this.state.password);
-    event.preventDefault();
-  }
-
-  render() {
-    return(
-      <div className="UserLogin">
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" onChange={this.handleUsernameChange}/>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" onChange={this.handlePasswordChange}/>
-          <input type="submit" value="Login"/>
-        </form>
-      </div>
-    );
-  }
-}
-
-class App extends Component {
-  render() {
+    const inputPhrase = this.state.input_phrase;
+    const inputLanguage = this.state.input_language;
+    const outputPhrase = this.state.output_phrase;
+    const handleInputSubmit = this.handleInputSubmit;
+    const handleInputChange = this.handleInputChange;
+    const handleSubmit = this.handleNextTranslation;
     return (
       <div className="App">
-        <ResultDisplay/>
+        <InputPhrase
+          input_phrase={inputPhrase}
+          handleSubmit={handleInputSubmit}
+          handleChange={handleInputChange}
+        />
+        {/*
+        <ResultDisplay
+          input_phrase={inputPhrase}
+          input_language={inputLanguage}
+          output_phrase={outputPhrase}
+          handleSubmit={handleSubmit}
+        />
+        */}
       </div>
     );
   }
