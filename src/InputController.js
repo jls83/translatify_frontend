@@ -10,7 +10,7 @@ export default class InputPhrase extends Component {
     return(
       <div className="InputPhrase">
         <form onSubmit={handleSubmit}>
-          <textarea value={inputPhrase} onChange={handleChange} />
+          <textarea placeholder={"Enter your text to translate here!"} value={inputPhrase} onChange={handleChange} />
           <input type="submit" value="Submit" />
         </form>
       </div>

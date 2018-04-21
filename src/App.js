@@ -9,12 +9,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.initState = {
-      input_phrase: "Enter your text to translate here!",
+      input_phrase: "",
       input_language: "",
       output_phrase: "",
       username: "",
       password: "",
-      isLoggedIn: false, // for testing!
+      isLoggedIn: true, // for testing!
     };
     this.state = this.initState;
 
