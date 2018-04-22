@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Button, Label, Segment } from 'semantic-ui-react';
 
 export default class ResultDisplay extends Component {
   render() {
     return(
       <div className="OutputDisplay">
-        <form onSubmit={this.props.handleSubmit}>
-          <PhraseDisplay phrase_type="InputData" phrase={this.props.input_phrase}/>
-          <LanguageDisplay input_language={this.props.input_language}/>
-          <PhraseDisplay phrase_type="OutputData" phrase={this.props.output_phrase}/>
-          <input type="submit" value="Translate Again?" />
-        </form>
+        <PhraseDisplay phrase_type="InputData" phrase={this.props.input_phrase} input_language={this.props.input_language}/>
+        <br />
+        <PhraseDisplay phrase_type="OutputData" phrase={this.props.output_phrase}/>
+        <br />
+        <Button type="submit" onClick={this.props.handleSubmit}>Translate Again?</Button>
       </div>
     );
   }
@@ -20,6 +20,7 @@ class PhraseDisplay extends Component {
   render() {
     const phraseType = this.props.phrase_type;
     const phrase = this.props.phrase;
+    const inputLanguage = this.props.input_language;
 
     let phraseHeader = '';
     if (phraseType === "InputData") {
@@ -31,8 +32,14 @@ class PhraseDisplay extends Component {
 
     return(
       <div className={phraseType}>
-        <h4>{phraseHeader}</h4>
-        <h2>{phrase}</h2>
+        <Segment size={'huge'}>
+          <Label attached='top'>{phraseHeader}</Label>
+          <p>{phrase}</p>
+          {inputLanguage ?
+            (<LanguageDisplay input_language={inputLanguage}/>) :
+            (null)
+          }
+        </Segment>
       </div>
     );
   }
@@ -43,9 +50,9 @@ class LanguageDisplay extends Component {
     const inputLanguage = this.props.input_language;
 
     return(
-      <div className="LanguageDisplay">
+      <Label size={'small'}>
         <p>{inputLanguage}</p>
-      </div>
+      </Label>
     );
   }
 }

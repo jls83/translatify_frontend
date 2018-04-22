@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Grid, Menu } from 'semantic-ui-react';
 
 import InputPhrase from './InputController';
 import ResultDisplay from './ResultController';
@@ -14,7 +15,7 @@ class App extends Component {
       output_phrase: "",
       username: "",
       password: "",
-      isLoggedIn: false,
+      isLoggedIn: true, //testing
     };
 
     this.blankPhraseState = {
@@ -189,7 +190,16 @@ class App extends Component {
 
     return (
       <div className="App">
-        {displayComponent}
+        <Menu/>
+        <Grid columns={3}>
+          <Grid.Row>
+            <Grid.Column/>
+            <Grid.Column>
+              {displayComponent}
+            </Grid.Column>
+            <Grid.Column/>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }

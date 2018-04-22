@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button, Form } from 'semantic-ui-react';
+
 import './App.css';
 
 export default class UserLogin extends Component {
@@ -9,13 +11,17 @@ export default class UserLogin extends Component {
 
     return(
       <div className="UserLogin">
-        <form onSubmit={handleLoginSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" onChange={handleUsernameChange}/>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" onChange={handlePasswordChange}/>
-          <input type="submit" value="Login"/>
-        </form>
+        <Form onSubmit={handleLoginSubmit}>
+          <Form.Field>
+            <label>Username:</label>
+            <input type="text" id="username" onChange={handleUsernameChange}/>
+          </Form.Field>
+          <Form.Field>
+            <label>Password:</label>
+            <input type="password" id="password" onChange={handlePasswordChange}/>
+          </Form.Field>
+          <Button type="submit">Login</Button>
+        </Form>
       </div>
     );
   }
