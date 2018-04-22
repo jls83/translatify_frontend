@@ -42,6 +42,18 @@ class App extends Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const storageUsername = localStorage.getItem('translatifyUsername');
+    const storageAuthToken = localStorage.getItem('translatifyAuthToken');
+
+    if (storageUsername && storageAuthToken) {
+      this.setState({
+        username: storageUsername,
+        isLoggedIn: true,
+      });
+    }
+  }
+
   // For ResultController
   handleNextTranslation(event) {
     console.log("Next translation requested");
@@ -59,7 +71,7 @@ class App extends Component {
 
   handleInputSubmit(event) {
     console.log('A phrase was submitted: ' + this.state.input_phrase);
-    const headerToken = "Token " + localStorage.getItem("authToken")
+    const headerToken = "Token " + localStorage.getItem("translatifyAuthToken")
     const data = {
       requested_phrase: this.state.input_phrase
     };
@@ -104,7 +116,8 @@ class App extends Component {
       username: "",
       isLoggedIn: false
     });
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("translatifyUsername");
+    localStorage.removeItem("translatifyAuthToken");
     console.log(this.state.username + "has logged out.");
     event.preventDefault();
   }
@@ -124,6 +137,7 @@ class App extends Component {
     const headers = new Headers({
       "Content-Type": "application/json"
     });
+    const username = this.state.username;
 
     fetch(this.baseUrl + "rest-auth/login/", {
       body: JSON.stringify(data),
@@ -136,7 +150,8 @@ class App extends Component {
       })
       .then(json => {
         const token = json.key
-        localStorage.setItem("authToken", token);
+        localStorage.setItem("translatifyAuthToken", token);
+        localStorage.setItem("translatifyUsername", username);
         this.setState({
           isLoggedIn: true,
           password: ""
