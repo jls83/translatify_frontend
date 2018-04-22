@@ -28,6 +28,7 @@ class PhraseDisplay extends Component {
     else if (phraseType === "OutputData") {
       phraseHeader = "Translated:"
     }
+
     return(
       <div className={phraseType}>
         <h4>{phraseHeader}</h4>

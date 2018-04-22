@@ -26,7 +26,10 @@ class App extends Component {
     this.state = this.initState;
     this.baseUrl = "http://localhost:8000/";
 
+    this.handleResponseErrors = this.handleResponseErrors.bind(this);
+
     this.handleNextTranslation = this.handleNextTranslation.bind(this);
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
 
@@ -34,7 +37,6 @@ class App extends Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-    this.handleResponseErrors = this.handleResponseErrors.bind(this);
   }
 
   // For ResultController
@@ -146,13 +148,14 @@ class App extends Component {
   }
 
   render() {
-    const handleInputSubmit = this.handleInputSubmit;
-    const handleInputChange = this.handleInputChange;
-    const handleNextTranslation = this.handleNextTranslation;
     const handleUsernameChange = this.handleUsernameChange;
     const handlePasswordChange = this.handlePasswordChange;
     const handleLoginSubmit = this.handleLoginSubmit;
     const handleLogoutSubmit = this.handleLogoutSubmit;
+
+    const handleInputSubmit = this.handleInputSubmit;
+    const handleInputChange = this.handleInputChange;
+    const handleNextTranslation = this.handleNextTranslation;
 
     const inputPhrase = this.state.input_phrase;
     const inputLanguage = this.state.input_language;
