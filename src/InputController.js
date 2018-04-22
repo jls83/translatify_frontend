@@ -14,7 +14,7 @@ export default class InputPhrase extends Component {
         <Form onSubmit={handleSubmit}>
           <TextArea style={{marginBottom: '1em'}} placeholder={"Enter your text to translate here!"} value={inputPhrase} onChange={handleChange} />
           <br />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" color="blue">Submit</Button>
         </Form>
       </div>
     );

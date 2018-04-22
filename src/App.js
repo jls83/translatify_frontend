@@ -5,6 +5,7 @@ import { Grid, Menu } from 'semantic-ui-react';
 import InputPhrase from './InputController';
 import ResultDisplay from './ResultController';
 import UserLogin from './LoginController';
+import Navbar from './NavbarController';
 
 class App extends Component {
   constructor(props) {
@@ -190,7 +191,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Menu/>
+        <Navbar handleLogoutSubmit={this.handleLogoutSubmit} isLoggedIn={this.state.isLoggedIn}/>
         <Grid columns={3}>
           <Grid.Row>
             <Grid.Column/>

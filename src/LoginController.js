@@ -20,7 +20,7 @@ export default class UserLogin extends Component {
             <label>Password:</label>
             <input type="password" id="password" onChange={handlePasswordChange}/>
           </Form.Field>
-          <Button type="submit">Login</Button>
+          <Button type="submit" color="blue">Login</Button>
         </Form>
       </div>
     );

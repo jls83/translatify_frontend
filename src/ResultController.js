@@ -12,7 +12,7 @@ export default class ResultDisplay extends Component {
         <br />
         <PhraseDisplay phrase_type="OutputData" phrase={this.props.output_phrase}/>
         <br />
-        <Button type="submit" onClick={this.props.handleSubmit}>Translate Again?</Button>
+        <Button type="submit" onClick={this.props.handleSubmit} color="blue">Translate Again?</Button>
       </div>
     );
   }
