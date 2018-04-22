@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button, Label, Segment } from 'semantic-ui-react';
+import { Button, Flag, Label, Segment } from 'semantic-ui-react';
 
 import getLanguageName from './LanguageFunctions'
 
@@ -54,7 +54,10 @@ class LanguageDisplay extends Component {
 
     return(
       <Label size={'small'}>
-        <p>{inputLanguageName}</p>
+        <p>
+          <Flag name={inputLanguageCode}/>
+          {inputLanguageName}
+        </p>
       </Label>
     );
   }
