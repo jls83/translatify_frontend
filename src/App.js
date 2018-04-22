@@ -15,7 +15,7 @@ class App extends Component {
       output_phrase: "",
       username: "",
       password: "",
-      isLoggedIn: true, //testing
+      isLoggedIn: false,
     };
 
     this.blankPhraseState = {

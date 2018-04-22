@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { Button, Label, Segment } from 'semantic-ui-react';
 
+import getLanguageName from './LanguageFunctions'
+
 export default class ResultDisplay extends Component {
   render() {
     return(
@@ -47,11 +49,12 @@ class PhraseDisplay extends Component {
 
 class LanguageDisplay extends Component {
   render() {
-    const inputLanguage = this.props.input_language;
+    const inputLanguageCode = this.props.input_language;
+    const inputLanguageName = getLanguageName(inputLanguageCode);
 
     return(
       <Label size={'small'}>
-        <p>{inputLanguage}</p>
+        <p>{inputLanguageName}</p>
       </Label>
     );
   }

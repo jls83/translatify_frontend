@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0743a753-e4a5-4a37-be66-171e3cac0fbf" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/LanguageFunctions.js" />
       <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
@@ -39,9 +40,10 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+            <state relative-caret-position="306">
+              <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
               <folding>
+                <element signature="e#0#41#0" expanded="true" />
                 <element signature="n#!!block;n#handleNextTranslation#0;n#App#0" expanded="false" />
                 <element signature="n#!!block;n#handleInputChange#0;n#App#0" expanded="false" />
                 <element signature="n#!!block;n#handleInputSubmit#0;n#App#0" expanded="false" />
@@ -50,6 +52,18 @@
                 <element signature="n#!!block;n#handleLogoutSubmit#0;n#App#0" expanded="false" />
                 <element signature="n#!!block;n#handleResponseErrors#0;n#App#0" expanded="false" />
                 <element signature="n#!!block;n#handleLoginSubmit#0;n#App#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LanguageFunctions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/LanguageFunctions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="736" column="34" lean-forward="false" selection-start-line="736" selection-start-column="34" selection-end-line="736" selection-end-column="34" />
+              <folding>
+                <element signature="e#17#13170#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -88,9 +102,11 @@
       <file leaf-file-name="ResultController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ResultController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="774">
+              <caret line="52" column="40" lean-forward="false" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -134,8 +150,9 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/LoginController.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/src/ResultController.js" />
         <option value="$PROJECT_DIR$/src/InputController.js" />
+        <option value="$PROJECT_DIR$/src/ResultController.js" />
+        <option value="$PROJECT_DIR$/src/LanguageFunctions.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
@@ -225,12 +242,12 @@
       <updated>1524257842297</updated>
       <workItem from="1524257843607" duration="3291000" />
       <workItem from="1524334346863" duration="6442000" />
-      <workItem from="1524342416468" duration="15393000" />
+      <workItem from="1524342416468" duration="16480000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25126000" />
+    <option name="totallyTimeSpent" value="26213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -274,6 +291,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#41#0" expanded="true" />
             <element signature="n#!!block;n#handleNextTranslation#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#handleInputChange#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#handleInputSubmit#0;n#App#0" expanded="false" />
@@ -290,7 +308,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="11" column="26" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -315,6 +335,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#41#0" expanded="true" />
             <element signature="n#!!block;n#handleNextTranslation#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#handleInputChange#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#handleInputSubmit#0;n#App#0" expanded="false" />
@@ -385,17 +406,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ResultController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="774">
+          <caret line="52" column="40" lean-forward="false" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LanguageFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="736" column="34" lean-forward="false" selection-start-line="736" selection-start-column="34" selection-end-line="736" selection-end-column="34" />
+          <folding>
+            <element signature="e#17#13170#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+        <state relative-caret-position="306">
+          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
           <folding>
+            <element signature="e#0#41#0" expanded="true" />
             <element signature="n#!!block;n#handleNextTranslation#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#handleInputChange#0;n#App#0" expanded="false" />
             <element signature="n#!!block;n#handleInputSubmit#0;n#App#0" expanded="false" />
