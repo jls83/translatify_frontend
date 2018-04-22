@@ -17,6 +17,7 @@ class App extends Component {
       username: "",
       password: "",
       isLoggedIn: false,
+      authErrors: [],
     };
 
     this.blankPhraseState = {
@@ -144,40 +145,41 @@ class App extends Component {
       .catch((error) => {
         console.log("Error logging in");
         console.log(error);
-        this.setState(this.initState);
+        this.setState({
+          username: "",
+          password: "",
+        });
+        this.state.authErrors.push("There was an error logging in; please try again");
+        this.setState(this.state);
       });
-    event.preventDefault();
+    //event.preventDefault();
   }
 
   render() {
-    const handleUsernameChange = this.handleUsernameChange;
-    const handlePasswordChange = this.handlePasswordChange;
-    const handleLoginSubmit = this.handleLoginSubmit;
-    const handleLogoutSubmit = this.handleLogoutSubmit;
-
-    const handleInputSubmit = this.handleInputSubmit;
-    const handleInputChange = this.handleInputChange;
-    const handleNextTranslation = this.handleNextTranslation;
-
     const inputPhrase = this.state.input_phrase;
     const inputLanguage = this.state.input_language;
     const outputPhrase = this.state.output_phrase;
+
     const isLoggedIn = this.state.isLoggedIn;
+    const authErrors = this.state.authErrors;
 
     let displayComponent;
 
     if (!isLoggedIn) {
       displayComponent = (<UserLogin
-        handleLoginSubmit={handleLoginSubmit}
-        handleUsernameChange={handleUsernameChange}
-        handlePasswordChange={handlePasswordChange}
+        username={this.state.username}
+        password={this.state.password}
+        handleLoginSubmit={this.handleLoginSubmit}
+        handleUsernameChange={this.handleUsernameChange}
+        handlePasswordChange={this.handlePasswordChange}
+        authErrors={authErrors}
       />);
     }
     else if (inputLanguage === "") {
       displayComponent = (<InputPhrase
         input_phrase={inputPhrase}
-        handleSubmit={handleInputSubmit}
-        handleChange={handleInputChange}
+        handleSubmit={this.handleInputSubmit}
+        handleChange={this.handleInputChange}
       />);
     }
     else {
@@ -185,7 +187,7 @@ class App extends Component {
         input_phrase={inputPhrase}
         input_language={inputLanguage}
         output_phrase={outputPhrase}
-        handleSubmit={handleNextTranslation}
+        handleSubmit={this.handleNextTranslation}
       />);
     }
 
