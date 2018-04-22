@@ -14,18 +14,27 @@ class App extends Component {
       output_phrase: "",
       username: "",
       password: "",
-      isLoggedIn: false, // for testing!
+      isLoggedIn: false,
+    };
+
+    this.blankPhraseState = {
+      input_phrase: "",
+      input_language: "",
+      output_phrase: "",
     };
 
     this.state = this.initState;
+    this.baseUrl = "http://localhost:8000/";
 
     this.handleNextTranslation = this.handleNextTranslation.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
+
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this);
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+    this.handleResponseErrors = this.handleResponseErrors.bind(this);
   }
 
   // For ResultController
@@ -45,7 +54,34 @@ class App extends Component {
 
   handleInputSubmit(event) {
     console.log('A phrase was submitted: ' + this.state.input_phrase);
-    this.setState({input_language: 'it'});
+    const headerToken = "Token " + localStorage.getItem("authToken")
+    const data = {
+      requested_phrase: this.state.input_phrase
+    };
+    const headers = new Headers({
+      "Content-Type": "application/json",
+      "Authorization": headerToken
+    });
+    fetch(this.baseUrl + "translate/", {
+      body: JSON.stringify(data),
+      method: 'POST',
+      headers: headers
+    })
+      .then(this.handleResponseErrors)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+          this.setState({
+            input_language: json.input_language,
+            output_phrase: json.output_phrase
+          });
+      })
+      .catch((error) => {
+        console.log("Error submitting translation request");
+        console.log(error);
+        this.setState(this.blankPhraseState);
+      });
     event.preventDefault();
   }
 
@@ -59,16 +95,23 @@ class App extends Component {
   }
 
   handleLogoutSubmit (event) {
-    console.log(this.state.username + "has logged out.");
     this.setState({
       username: "",
       isLoggedIn: false
     });
+    localStorage.removeItem("authToken");
+    console.log(this.state.username + "has logged out.");
     event.preventDefault();
   }
 
+  handleResponseErrors (response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
+
   handleLoginSubmit(event) {
-    const url = "http://localhost:8000/rest-auth/login/";
     const data = {
       username: this.state.username,
       password: this.state.password
@@ -77,27 +120,27 @@ class App extends Component {
       "Content-Type": "application/json"
     });
 
-    fetch(url, {
+    fetch(this.baseUrl + "rest-auth/login/", {
       body: JSON.stringify(data),
       method: 'POST',
       headers: headers
     })
+      .then(this.handleResponseErrors)
       .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText)
-        }
-        return response
+        return response.json();
       })
-      .then(response => {
+      .then(json => {
+        const token = json.key
+        localStorage.setItem("authToken", token);
         this.setState({
-          authToken: response.json().key,
           isLoggedIn: true,
           password: ""
         });
       })
-      .catch(() => {
+      .catch((error) => {
         console.log("Error logging in");
-        this.setState({username: "", isLoggedIn: false})
+        console.log(error);
+        this.setState(this.initState);
       });
     event.preventDefault();
   }
