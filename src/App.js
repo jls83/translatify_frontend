@@ -7,6 +7,8 @@ import ResultDisplay from './ResultController';
 import UserLogin from './LoginController';
 import Navbar from './NavbarController';
 
+const apiServer = "http://localhost:8000/";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,7 @@ class App extends Component {
       password: "",
       isLoggedIn: false,
       authErrors: [],
+      inputErrors: [],
     };
 
     this.blankPhraseState = {
@@ -27,7 +30,7 @@ class App extends Component {
     };
 
     this.state = this.initState;
-    this.baseUrl = "http://localhost:8000/";
+    this.baseUrl = apiServer;
 
     this.handleResponseErrors = this.handleResponseErrors.bind(this);
 
@@ -43,8 +46,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const storageUsername = localStorage.getItem('translatifyUsername');
-    const storageAuthToken = localStorage.getItem('translatifyAuthToken');
+    const storageUsername = sessionStorage.getItem('translatifyUsername');
+    const storageAuthToken = sessionStorage.getItem('translatifyAuthToken');
 
     if (storageUsername && storageAuthToken) {
       this.setState({
@@ -70,8 +73,15 @@ class App extends Component {
   }
 
   handleInputSubmit(event) {
+    if (this.state.input_phrase.length > 500) {
+      this.state.inputErrors.push("The phrase you submitted was too long");
+      this.setState(this.state);
+      return;
+    }
+
+
     console.log('A phrase was submitted: ' + this.state.input_phrase);
-    const headerToken = "Token " + localStorage.getItem("translatifyAuthToken")
+    const headerToken = "Token " + sessionStorage.getItem("translatifyAuthToken")
     const data = {
       requested_phrase: this.state.input_phrase
     };
@@ -116,8 +126,8 @@ class App extends Component {
       username: "",
       isLoggedIn: false
     });
-    localStorage.removeItem("translatifyUsername");
-    localStorage.removeItem("translatifyAuthToken");
+    sessionStorage.removeItem("translatifyUsername");
+    sessionStorage.removeItem("translatifyAuthToken");
     console.log(this.state.username + "has logged out.");
     event.preventDefault();
   }
@@ -150,8 +160,8 @@ class App extends Component {
       })
       .then(json => {
         const token = json.key
-        localStorage.setItem("translatifyAuthToken", token);
-        localStorage.setItem("translatifyUsername", username);
+        sessionStorage.setItem("translatifyAuthToken", token);
+        sessionStorage.setItem("translatifyUsername", username);
         this.setState({
           isLoggedIn: true,
           password: ""
@@ -165,7 +175,6 @@ class App extends Component {
           password: "",
         });
         this.state.authErrors.push("There was an error logging in; please try again");
-        this.setState(this.state);
       });
     //event.preventDefault();
   }
@@ -177,6 +186,7 @@ class App extends Component {
 
     const isLoggedIn = this.state.isLoggedIn;
     const authErrors = this.state.authErrors;
+    const inputErrors = this.state.inputErrors;
 
     let displayComponent;
 
@@ -195,6 +205,7 @@ class App extends Component {
         input_phrase={inputPhrase}
         handleSubmit={this.handleInputSubmit}
         handleChange={this.handleInputChange}
+        inputErrors={inputErrors}
       />);
     }
     else {
