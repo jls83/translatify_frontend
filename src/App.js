@@ -63,7 +63,8 @@ class App extends Component {
     this.setState({
       input_phrase: "",
       input_language: "",
-      output_phrase: ""
+      output_phrase: "",
+      inputErrors: [],
     });
   }
 
@@ -73,6 +74,11 @@ class App extends Component {
   }
 
   handleInputSubmit(event) {
+    if (this.state.input_phrase.length < 3) {
+      this.state.inputErrors.push("The phrase you submitted was too short; phrases must be at least 3 characters");
+      this.setState(this.state);
+      return;
+    }
     if (this.state.input_phrase.length > 500) {
       this.state.inputErrors.push("The phrase you submitted was too long");
       this.setState(this.state);
@@ -92,7 +98,8 @@ class App extends Component {
     fetch(this.baseUrl + "translate/", {
       body: JSON.stringify(data),
       method: 'POST',
-      headers: headers
+      headers: headers,
+      "Access-Control-Allow-Origin": "*"
     })
       .then(this.handleResponseErrors)
       .then(response => {
