@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Grid, Menu } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 
 export default class Navbar extends Component {
   render() {

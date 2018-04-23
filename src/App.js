@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Grid, Menu } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 import InputPhrase from './InputController';
 import ResultDisplay from './ResultController';
 import UserLogin from './LoginController';
 import Navbar from './NavbarController';
 
-const apiServer = "http://localhost:8000/";
+const apiServer = "https://translatifyapi.sandco.io/";
 
 class App extends Component {
   constructor(props) {
